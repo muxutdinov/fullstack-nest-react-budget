@@ -1,6 +1,6 @@
 import {
+  BadRequestException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as argon2 from 'argon2';
@@ -20,7 +20,7 @@ export class AuthService {
     if (user && passwordIsMatch) {
       return user;
     }
-    throw new UnauthorizedException('User or password is incorrect!');
+    throw new BadRequestException('Email or password is incorrect!');
   }
 
   async login(user: IUser) {
