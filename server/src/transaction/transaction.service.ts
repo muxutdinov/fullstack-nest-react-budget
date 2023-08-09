@@ -39,6 +39,17 @@ export class TransactionService {
     return transactions;
   }
 
+  async findAllByType(id: number, type: string) {
+    const transactions = await this.transactionRepository.find({
+      where: {
+        user: { id },
+        type,
+      },
+    });
+    const total = transactions.reduce((acc, obj) => acc + obj.amount, 0);
+    return total
+  }
+
   async findOne(id: number) {
     const transaction = await this.transactionRepository.findOne({
       where: { id },
@@ -57,7 +68,7 @@ export class TransactionService {
     return await this.transactionRepository.update(id, updateTransactionDto);
   }
 
- async remove(id: number) {
+  async remove(id: number) {
     const transaction = await this.transactionRepository.findOne({
       where: { id },
     });
@@ -65,22 +76,22 @@ export class TransactionService {
     return await this.transactionRepository.delete(id);
   }
 
-  async findAllWithPagination(id:number,page:number,limit:number){
+  async findAllWithPagination(id: number, page: number, limit: number) {
     const transactions = await this.transactionRepository.find({
-      where:{
-        user:{id}
+      where: {
+        user: { id },
       },
       // relations:{
       //   category:true,
       //   user:true
       // },
-      order:{
-        createdAt:"DESC"
+      order: {
+        createdAt: 'DESC',
       },
-      take:limit,
-      skip:(page - 1) * limit
-    })
+      take: limit,
+      skip: (page - 1) * limit,
+    });
 
-    return transactions
+    return transactions;
   }
 }
