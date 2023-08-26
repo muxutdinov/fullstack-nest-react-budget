@@ -20,9 +20,8 @@ export const categoriesAction = async ({ request }) => {
           toast.success("Created")
         }
         return null;
-      } catch (err) {
-        console.log(err);
-        toast.error("An occourd error")
+      } catch (err:any) {
+        toast.error(err.response.data.message ? err.response.data.message : "Error")
         return null;
       }
     }
@@ -58,7 +57,7 @@ const Categories: FC = () => {
   const [categoryId, setCategoryId] = useState<number>(0);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const [visable, setVisibleModal] = useState<boolean>(false);
+  const [visableModal, setVisibleModal] = useState<boolean>(false);
   return (
     <>
       <div className="mt-10 p-4 rounded-md bg-slate-800">
@@ -90,19 +89,19 @@ const Categories: FC = () => {
             </div>
           ))}
         </div>
-        <div
+        <button
           onClick={() => setVisibleModal(true)}
           className="cursor-pointer mt-5 max-w-fit flex items-center text-white/50 gap-2 hover:text-white"
         >
           <FaPlus />
           <span>Create a new category</span>
-        </div>
+        </button>
       </div>
 
-      {visable && (
+      {visableModal && (
         <CategoryModal type="post" setVisibleModal={setVisibleModal} />
       )}
-      {visable && isEdit && (
+      {visableModal && isEdit && (
         <CategoryModal
           type="patch"
           id={categoryId}
