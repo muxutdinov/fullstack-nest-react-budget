@@ -1,3 +1,4 @@
+import { IsNotEmpty } from 'class-validator';
 import { Transaction } from 'src/transaction/entities/transaction.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
@@ -16,6 +17,7 @@ export class Category {
   id: number;
 
   @Column()
+  @IsNotEmpty()
   title: string;
 
   @ManyToOne(() => User, (user) => user.categories)
