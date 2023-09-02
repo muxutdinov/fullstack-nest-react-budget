@@ -34,3 +34,14 @@
     @apply bg-green-600 hover:bg-green-800;
   }
 }
+@media only screen and (max-width: 800px) {
+  .transaction_res_col {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .form_res{
+    width: 100% !important;
+  }
+}
+.css-nxuqpx-MuiPaper-root-MuiAppBar-root{
+  position: relative !important;
+}

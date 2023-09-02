@@ -21,10 +21,12 @@ export class Transaction {
   @ManyToOne(() => User, (user) => user.transactions)
   @JoinColumn({ name: 'user_id' })
   user: User;
-  
-  @ManyToOne(()=>Category,(category)=>category.transactions)
+
+  @ManyToOne(() => Category, (category) => category.transactions, {
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'category_id' })
-  category:Category
+  category: Category;
 
   @Column({ nullable: true })
   type: string;

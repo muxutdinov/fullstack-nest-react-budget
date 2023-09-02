@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaBtc, FaSignOutAlt } from "react-icons/fa";
-import { useAuth } from "../hooks/useAuth";
+import { getEmail, useAuth } from "../hooks/useAuth";
 import { useAppDispatch } from "../store/hooks";
 import { logout } from "../store/user/userSlice";
 import { removeTokenFromLocalStorage } from "../helpers/localstorage.helper";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 const Header: FC = () => {
   const isAuth = useAuth();
+  const email = getEmail();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const logoutHandler = () => {
@@ -22,6 +23,11 @@ const Header: FC = () => {
       <Link to="/">
         <FaBtc size={24} />
       </Link>
+      {isAuth && (
+        <div>
+          Sign in as: <span>{email}</span>
+        </div>
+      )}
       {isAuth && (
         <nav className="ml-auto mr-10">
           <ul className="flex items-center gap-5">
@@ -65,12 +71,15 @@ const Header: FC = () => {
           <FaSignOutAlt />
         </button>
       ) : (
-        <Link
+        <NavLink
           className="py-2 ml-auto text-white/50 hover:text-white"
           to={"auth"}
+          // className={({ isActive }) =>
+          //   isActive ? "text-white" : "text-white/50"
+          // }
         >
           Log In / Sign In
-        </Link>
+        </NavLink>
       )}
     </header>
   );

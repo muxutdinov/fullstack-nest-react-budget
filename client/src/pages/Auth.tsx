@@ -46,7 +46,7 @@ const Auth: FC = () => {
         {isLogin ? "Login" : "Register"}
       </h1>
       <form
-        className="mx-auto flex w-1/3 flex-col gap-5"
+        className="mx-auto flex w-1/3 flex-col gap-5 form_res"
         onSubmit={isLogin ? loginHandler : registerHandler}
       >
         <input

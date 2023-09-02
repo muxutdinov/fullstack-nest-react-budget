@@ -1,11 +1,15 @@
-import { FC } from "react"
+import { Alert, AlertTitle } from "@mui/material";
+import { FC } from "react";
 
-const Home:FC = () => {
+const Home: FC = () => {
   return (
-    <div>
-      Home
+    <div className="mt-20">
+      <Alert severity="info">
+        <AlertTitle>About this app</AlertTitle>
+        This application helps you to manage your income and expenses.
+      </Alert>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
